@@ -284,9 +284,9 @@ void DSWidget::slotFindVersionsForPackageFinished(QNetworkReply* reply)
 
     if (reply->error())
     {
-        qCWarning(DIGIKAM_WEBSERVICES_LOG) << "Download of "
-                                           << replyUrl.toEncoded().constData()
-                                           << "failed: " << qPrintable(reply->errorString());
+        qWarning() << "Download of "
+                   << replyUrl.toEncoded().constData()
+                   << "failed: " << qPrintable(reply->errorString());
     }
     else
     {

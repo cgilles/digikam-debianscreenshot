@@ -303,7 +303,7 @@ void DSWindow::slotAddScreenshotDone(int errCode, const QString& errMsg)
                                             qApp->activeWindow(),
                                             qApp->applicationName(),
                                             tr("Failed to upload photo to Debian Screenshots: %1\n"
-                                                 "Do you want to continue?", errMsg))
+                                                 "Do you want to continue?").arg(errMsg))
             == QMessageBox::Yes)
         {
             m_widget->progressBar()->hide();
