@@ -59,7 +59,7 @@ QString DSPlugin::iid() const
 
 QIcon DSPlugin::icon() const
 {
-    return QIcon::fromTheme(QLatin1String("dk-debianscreenshots"));
+    return QIcon::fromTheme(QLatin1String(":/debianscreenshots/icons/dk-debianscreenshots"));
 }
 
 QString DSPlugin::description() const
