@@ -1,4 +1,4 @@
-# Photo Layout Editor
+# Debian Screenshots
 
 This experimental and legacy tool allows you to upload desktop captures to Debian documentation website.
 
@@ -6,8 +6,9 @@ This experimental and legacy tool allows you to upload desktop captures to Debia
 
 - Cmake 3.x.
 - Qt5.
+- ECM
 - KF5.
-- digiKam 7.x plugin interface. <https://www.digikam.org> (optional)
+- digiKam 7.x plugin interface. <https://www.digikam.org>
 
 # Compiling and Installing
 
