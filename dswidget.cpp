@@ -84,22 +84,22 @@ DSWidget::DSWidget(DInfoInterface* const iface, QWidget* const parent)
     m_imgList->setAllowRAW(true);
     m_imgList->setIface(iface);
     m_imgList->loadImagesFromCurrentSelection();
-    m_imgList->listView()->setWhatsThis(i18n("This is the list of images to upload to Debian Screenshots."));
+    m_imgList->listView()->setWhatsThis(tr("This is the list of images to upload to Debian Screenshots."));
 
     QWidget* const settingsBox           = new QWidget(this);
     QVBoxLayout* const settingsBoxLayout = new QVBoxLayout(settingsBox);
 
     m_headerLabel = new DActiveLabel(QUrl(), QString(), settingsBox);
     m_headerLabel->updateData(QUrl(DigikamGenericDebianScreenshotsPlugin::debshotsUrl), QImage(QLatin1String(":/debianscreenshots/dslogo.png")));
-    m_headerLabel->setWhatsThis(i18n("This is a clickable link to open the Debian Screenshots home page in a web browser."));
+    m_headerLabel->setWhatsThis(tr("This is a clickable link to open the Debian Screenshots home page in a web browser."));
 
     QGroupBox* const pkgGroupBox   = new QGroupBox(settingsBox);
-    pkgGroupBox->setTitle(i18n("Package"));
-    pkgGroupBox->setWhatsThis(i18n("This is the Debian Screenshots package to which selected photos will be uploaded."));
+    pkgGroupBox->setTitle(tr("Package"));
+    pkgGroupBox->setWhatsThis(tr("This is the Debian Screenshots package to which selected photos will be uploaded."));
 
     QGridLayout* const sdnLayout   = new QGridLayout(pkgGroupBox);
 
-    QLabel* const pkgLabel         = new QLabel(i18n("Package:"), pkgGroupBox);
+    QLabel* const pkgLabel         = new QLabel(tr("Package:"), pkgGroupBox);
 
     m_pkgLineEdit                  = new QLineEdit(pkgGroupBox);
     QCompleter* const pkgCompleter = new QCompleter(this);
@@ -123,7 +123,7 @@ DSWidget::DSWidget(DInfoInterface* const iface, QWidget* const parent)
     connect(m_jsonManager, SIGNAL(finished(QNetworkReply*)),
             this, SLOT(slotFindVersionsForPackageFinished(QNetworkReply*)));
 
-    QLabel* const versionLabel = new QLabel(i18n("Software version:"), pkgGroupBox);
+    QLabel* const versionLabel = new QLabel(tr("Software version:"), pkgGroupBox);
     m_versionsComboBox         = new QComboBox(pkgGroupBox);
     m_versionsComboBox->setEditable(false);
     m_versionsComboBox->setEnabled(false); // Disable until we have a package name
@@ -132,7 +132,7 @@ DSWidget::DSWidget(DInfoInterface* const iface, QWidget* const parent)
     connect(m_versionsComboBox, SIGNAL(activated(int)),
             this, SLOT(slotEnableUpload()));
 
-    QLabel* const descriptionLabel  = new QLabel(i18n("Screenshot description:"), pkgGroupBox);
+    QLabel* const descriptionLabel  = new QLabel(tr("Screenshot description:"), pkgGroupBox);
     m_descriptionLineEdit           = new QLineEdit(pkgGroupBox);
     m_descriptionLineEdit->setMaxLength(40); // 40 is taken from screenshots.debian.net/upload page source
     m_descriptionLineEdit->setEnabled(false);

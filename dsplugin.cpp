@@ -64,12 +64,12 @@ QIcon DSPlugin::icon() const
 
 QString DSPlugin::description() const
 {
-    return i18n("A tool to export to Debian Screenshots site");
+    return tr("A tool to export to Debian Screenshots site");
 }
 
 QString DSPlugin::details() const
 {
-    return i18n("<p>This tool permit to export items to Debian Screenshots site.</p>"
+    return tr("<p>This tool permit to export items to Debian Screenshots site.</p>"
                 "<p>See Debian Screenshots web site for details: <a href='https://screenshots.debian.net/'>https://screenshots.debian.net/</a></p>");
 }
 

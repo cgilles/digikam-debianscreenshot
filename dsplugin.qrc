@@ -2,4 +2,12 @@
     <qresource prefix="/debianscreenshots">
         <file>dslogo.png</file>
     </qresource>
+    <qresource prefix="/icons">
+        <file>icons/16-apps-dk-debianscreenshots.png</file>
+        <file>icons/22-apps-dk-debianscreenshots.png</file>
+        <file>icons/32-apps-dk-debianscreenshots.png</file>
+        <file>icons/48-apps-dk-debianscreenshots.png</file>
+        <file>icons/sc-apps-dk-debianscreenshots.svgz</file>
+    </qresource>
+
 </RCC>

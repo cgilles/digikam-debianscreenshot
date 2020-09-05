@@ -66,10 +66,10 @@ DSWindow::DSWindow(DInfoInterface* const iface, QWidget* const /*parent*/)
     setMainWidget(m_widget);
     setWindowIcon(QIcon::fromTheme(QLatin1String("dk-debianscreenshots")));
     setModal(false);
-    setWindowTitle(i18n("Export to Debian Screenshots"));
+    setWindowTitle(tr("Export to Debian Screenshots"));
 
-    startButton()->setText(i18n("Start Upload"));
-    startButton()->setToolTip(i18n("Start upload to Debian Screenshots web service"));
+    startButton()->setText(tr("Start Upload"));
+    startButton()->setToolTip(tr("Start upload to Debian Screenshots web service"));
     startButton()->setEnabled(false); // Disable until package and version data have been fulfilled
 
     // ------------------------------------------------------------------------
@@ -167,11 +167,11 @@ void DSWindow::slotStartTransfer()
     m_imagesTotal = m_transferQueue.count();
     m_imagesCount = 0;
 
-    m_widget->progressBar()->setFormat(i18n("%v / %m"));
+    m_widget->progressBar()->setFormat(tr("%v / %m"));
     m_widget->progressBar()->setMaximum(m_imagesTotal);
     m_widget->progressBar()->setValue(0);
     m_widget->progressBar()->show();
-    m_widget->progressBar()->progressScheduled(i18n("Debian Screenshots export"), true, true);
+    m_widget->progressBar()->progressScheduled(tr("Debian Screenshots export"), true, true);
     m_widget->progressBar()->progressThumbnailChanged(QIcon::fromTheme(QLatin1String("dk-debianscreenshots")).pixmap(22, 22));
 
     uploadNextPhoto();
@@ -258,7 +258,7 @@ void DSWindow::uploadNextPhoto()
     {
         if (!prepareImageForUpload(imgPath, massageRequired))
         {
-            slotAddScreenshotDone(666, i18n("Cannot open file"));
+            slotAddScreenshotDone(666, tr("Cannot open file"));
             return;
         }
         res = m_talker->addScreenshot(m_tmpPath,
@@ -276,7 +276,7 @@ void DSWindow::uploadNextPhoto()
 
     if (!res)
     {
-        slotAddScreenshotDone(666, i18n("Cannot open file"));
+        slotAddScreenshotDone(666, tr("Cannot open file"));
         return;
     }
 }
@@ -302,7 +302,7 @@ void DSWindow::slotAddScreenshotDone(int errCode, const QString& errMsg)
         if (DMessageBox::showContinueCancel(QMessageBox::Warning,
                                             qApp->activeWindow(),
                                             qApp->applicationName(),
-                                            i18n("Failed to upload photo to Debian Screenshots: %1\n"
+                                            tr("Failed to upload photo to Debian Screenshots: %1\n"
                                                  "Do you want to continue?", errMsg))
             == QMessageBox::Yes)
         {
