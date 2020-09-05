@@ -98,8 +98,6 @@ target_link_libraries(Generic_DebianScreenshots_Plugin
 
 MACRO_ADD_PLUGIN_INSTALL_TARGET(Generic_DebianScreenshots_Plugin generic)
 
-add_subdirectory(icons)
-
 # ---
 
 feature_summary(WHAT ALL FATAL_ON_MISSING_REQUIRED_PACKAGES)
