@@ -21,6 +21,5 @@ cd build
 cmake -G "$MAKEFILES_TYPE" . \
       -DCMAKE_INSTALL_PREFIX=/usr \
       -Wno-dev \
-      -DENABLE_DPLUGIN=ON \
       ..
 
