@@ -44,7 +44,7 @@ class DSPlugin : public DPluginGeneric
 
 public:
 
-    explicit DSPlugin(QObject* const parent = 0);
+    explicit DSPlugin(QObject* const parent = nullptr);
     ~DSPlugin();
 
     QString name()                 const override;
@@ -54,8 +54,8 @@ public:
     QString description()          const override;
     QList<DPluginAuthor> authors() const override;
 
-    void setup(QObject* const) override;
-    void cleanUp()             override;
+    void setup(QObject* const)           override;
+    void cleanUp()                       override;
 
 private Q_SLOTS:
 
