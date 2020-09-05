@@ -39,7 +39,7 @@
 #include "drawdecoder.h"
 #include "dmessagebox.h"
 #include "ditemslist.h"
-#include "dmetadata.h"
+#include "metaengine.h"
 #include "dprogresswdg.h"
 #include "dstalker.h"
 #include "dswidget.h"

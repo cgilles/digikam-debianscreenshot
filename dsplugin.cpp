@@ -86,7 +86,7 @@ void DSPlugin::setup(QObject* const parent)
 {
     DPluginAction* const ac = new DPluginAction(parent);
     ac->setIcon(icon());
-    ac->setText(i18nc("@action", "Export to &Debian Screenshots..."));
+    ac->setText(tr("Export to &Debian Screenshots..."));
     ac->setObjectName(QLatin1String("export_debianscreenshot"));
     ac->setActionCategory(DPluginAction::GenericExport);
 
