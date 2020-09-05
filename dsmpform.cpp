@@ -32,10 +32,10 @@
 #include <QMimeType>
 #include <QUrl>
 #include <QString>
+#include <QDebug>
 
 // Local includes
 
-#include "digikam_debug.h"
 #include "wstoolutils.h"
 
 using namespace Digikam;
@@ -104,7 +104,7 @@ bool DSMPForm::addFile(const QString& fileName, const QString& path, const QStri
     if (mime.isEmpty())
         return false;
 
-    qCDebug(DIGIKAM_WEBSERVICES_LOG) << "mime = " << mime.toLatin1();
+    qDebug() << "mime = " << mime.toLatin1();
 
     QFile imageFile(path);
 

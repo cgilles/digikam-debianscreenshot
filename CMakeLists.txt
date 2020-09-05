@@ -34,6 +34,7 @@ find_package(Qt5 "5.6.0" REQUIRED
              NO_MODULE COMPONENTS
              Core
              Widgets
+             Xml
 )
 
 find_package(Threads)
@@ -54,6 +55,7 @@ find_package(KF5 "5.5.0" REQUIRED
 
 include_directories($<TARGET_PROPERTY:Qt5::Widgets,INTERFACE_INCLUDE_DIRECTORIES>
                     $<TARGET_PROPERTY:Qt5::Core,INTERFACE_INCLUDE_DIRECTORIES>
+                    $<TARGET_PROPERTY:Qt5::Xml,INTERFACE_INCLUDE_DIRECTORIES>
 
                     $<TARGET_PROPERTY:KF5::ConfigCore,INTERFACE_INCLUDE_DIRECTORIES>
                     $<TARGET_PROPERTY:KF5::KIOCore,INTERFACE_INCLUDE_DIRECTORIES>
@@ -88,6 +90,7 @@ target_link_libraries(Generic_DebianScreenshots_Plugin
 
                       Qt5::Core
                       Qt5::Widgets
+                      Qt5::Xml
 
                       KF5::KIOCore
                       KF5::KIOWidgets

@@ -49,15 +49,15 @@
 #include <QJsonObject>
 #include <QJsonValue>
 #include <QJsonArray>
+#include <QDebug>
 
 // KDE includes
 
-#include <klocalizedstring.h>
 #include <kio/accessmanager.h>
 
 // Local includes
 
-#include "digikam_debug.h"
+
 #include "dspackagedelegate.h"
 #include "dscommon.h"
 
@@ -208,13 +208,13 @@ void DSWidget::slotCompletePackageNameFinished(QNetworkReply* reply)
     // Check if this is the reply for the last request, or a delayed reply we are receiving just now
     if (QString::compare(replyUrl.toString(), m_lastQueryUrl.toString(), Qt::CaseInsensitive) != 0)
     {
-        qCDebug(DIGIKAM_WEBSERVICES_LOG) << "Received a delayed reply, discarding it";
+        qDebug() << "Received a delayed reply, discarding it";
         return; // It was a delayed reply, discard it
     }
 
     if (reply->error())
     {
-        qCDebug(DIGIKAM_WEBSERVICES_LOG) << "Didn't receive a reply for request "
+        qDebug() << "Didn't receive a reply for request "
                                          << replyUrl.toEncoded().constData() << " - "
                                          <<  qPrintable(reply->errorString());
     }
@@ -224,7 +224,7 @@ void DSWidget::slotCompletePackageNameFinished(QNetworkReply* reply)
 
         if (ba.isEmpty())
         {
-            qCDebug(DIGIKAM_WEBSERVICES_LOG) << "No completion data received for request "
+            qDebug() << "No completion data received for request "
                                              << replyUrl.toEncoded().constData()
                                              << "(probably no package matches that pattern)";
             return;
@@ -236,7 +236,7 @@ void DSWidget::slotCompletePackageNameFinished(QNetworkReply* reply)
 
         for (int i = 0 ; i < pkgSuggestions.count() ; ++i)
         {
-            qCDebug(DIGIKAM_WEBSERVICES_LOG) << "Package suggestion:" << pkgSuggestions.at(i);
+            qDebug() << "Package suggestion:" << pkgSuggestions.at(i);
 
             QModelIndex pkgIdx             = m->index(i, 0);
             QModelIndex descIdx            = m->index(i, 1);
@@ -244,7 +244,7 @@ void DSWidget::slotCompletePackageNameFinished(QNetworkReply* reply)
 
             if (!pkgDescSplit.isEmpty())
             {
-                qCDebug(DIGIKAM_WEBSERVICES_LOG) << "Package suggestion parsed:" << pkgDescSplit;
+                qDebug() << "Package suggestion parsed:" << pkgDescSplit;
 
                 QString pkg  = QString::fromUtf8(pkgDescSplit.at(0));
                 m->setData(pkgIdx, pkg);
@@ -296,7 +296,7 @@ void DSWidget::slotFindVersionsForPackageFinished(QNetworkReply* reply)
 
         if (versionSuggestions.isValid())
         {
-            qCDebug(DIGIKAM_WEBSERVICES_LOG) << "Query "
+            qDebug() << "Query "
                                              << replyUrl.toEncoded().constData()
                                              << "succeeded";
 
@@ -321,7 +321,7 @@ void DSWidget::slotFindVersionsForPackageFinished(QNetworkReply* reply)
         }
         else
         {
-            qCDebug(DIGIKAM_WEBSERVICES_LOG) << "Query "
+            qDebug() << "Query "
                                              << replyUrl.toEncoded().constData()
                                              << "failed";
         }

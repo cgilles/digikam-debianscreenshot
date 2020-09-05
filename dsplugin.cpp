@@ -26,10 +26,6 @@
 
 #include <QPointer>
 
-// KDE includes
-
-#include <klocalizedstring.h>
-
 // Local includes
 
 #include "dswindow.h"
@@ -53,7 +49,7 @@ void DSPlugin::cleanUp()
 
 QString DSPlugin::name() const
 {
-    return i18n("DebianScreenshots");
+    return tr("DebianScreenshots");
 }
 
 QString DSPlugin::iid() const

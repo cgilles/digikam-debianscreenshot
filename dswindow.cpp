@@ -32,10 +32,7 @@
 #include <QLineEdit>
 #include <QPushButton>
 #include <QApplication>
-
-// KDE includes
-
-#include <klocalizedstring.h>
+#include <QDebug>
 
 // Local includes
 
@@ -43,7 +40,6 @@
 #include "dmessagebox.h"
 #include "ditemslist.h"
 #include "dmetadata.h"
-#include "digikam_debug.h"
 #include "dprogresswdg.h"
 #include "dstalker.h"
 #include "dswidget.h"
@@ -187,7 +183,7 @@ bool DSWindow::prepareImageForUpload(const QString& imgPath, MassageType massage
 
     if ( massage == DSWindow::ImageIsRaw )
     {
-        qCDebug(DIGIKAM_WEBSERVICES_LOG) << "Get RAW preview " << imgPath;
+        qDebug() << "Get RAW preview " << imgPath;
         DRawDecoder::loadRawPreview(image, imgPath);
     }
     else
@@ -198,7 +194,7 @@ bool DSWindow::prepareImageForUpload(const QString& imgPath, MassageType massage
     // rescale image if required
     if ( massage == DSWindow::ResizeRequired )
     {
-        qCDebug(DIGIKAM_WEBSERVICES_LOG) << "Resizing image";
+        qDebug() << "Resizing image";
         image = image.scaled(maxWidth, maxHeight, Qt::KeepAspectRatio, Qt::SmoothTransformation);
     }
 
@@ -210,7 +206,7 @@ bool DSWindow::prepareImageForUpload(const QString& imgPath, MassageType massage
     // get temporary file name
     m_tmpPath = m_tmpDir + QFileInfo(imgPath).baseName().trimmed() + QLatin1String(".png");
 
-    qCDebug(DIGIKAM_WEBSERVICES_LOG) << "Saving to temp file: " << m_tmpPath;
+    qDebug() << "Saving to temp file: " << m_tmpPath;
     image.save(m_tmpPath, "PNG");
 
     return true;

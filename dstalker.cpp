@@ -33,6 +33,7 @@
 #include <QDomElement>
 #include <QtAlgorithms>
 #include <QApplication>
+#include <QDebug>
 
 // KDE includes
 
@@ -40,8 +41,6 @@
 
 // Local includes
 
-#include "digikam_version.h"
-#include "digikam_debug.h"
 #include "dsmpform.h"
 #include "dscommon.h"
 #include "dmessagebox.h"
@@ -53,7 +52,7 @@ namespace DigikamGenericDebianScreenshotsPlugin
 
 DSTalker::DSTalker(QWidget* const parent)
     : QObject(parent),
-      m_userAgent(QString::fromUtf8("KIPI-Plugin-DebianScreenshots/%1 (pgquiles@elpauer.org)").arg(digiKamVersion())),
+      m_userAgent(QString::fromUtf8("KIPI-Plugin-DebianScreenshots/1.0.0 (pgquiles@elpauer.org)")),
       m_uploadUrl(DigikamGenericDebianScreenshotsPlugin::debshotsUrl + QLatin1String("/uploadfile")),
       m_job(0)
 {
@@ -70,7 +69,7 @@ DSTalker::~DSTalker()
 bool DSTalker::addScreenshot(const QString& imgPath, const QString& packageName,
                              const QString& packageVersion, const QString& description)
 {
-    qCDebug(DIGIKAM_WEBSERVICES_LOG) << "Adding screenshot " << imgPath << " to package "
+    qDebug() << "Adding screenshot " << imgPath << " to package "
                                      << packageName << " " << packageVersion<< " using description '" << description << "'";
 
     if (m_job)
@@ -88,7 +87,7 @@ bool DSTalker::addScreenshot(const QString& imgPath, const QString& packageName,
     form.addFile(imgPath, imgPath, QLatin1String("file"));
     form.finish();
 
-    qCDebug(DIGIKAM_WEBSERVICES_LOG) << "FORM: " << endl << form.formData();
+    qDebug() << "FORM: " << endl << form.formData();
 
     KIO::TransferJob* const job = KIO::http_post(QUrl(m_uploadUrl), form.formData(), KIO::HideProgressInfo);
     job->addMetaData(QLatin1String("UserAgent"), m_userAgent);
@@ -108,7 +107,7 @@ bool DSTalker::addScreenshot(const QString& imgPath, const QString& packageName,
 
  void DSTalker::data(KIO::Job*, const QByteArray& data)
  {
-     qCDebug(DIGIKAM_WEBSERVICES_LOG) << Q_FUNC_INFO;
+     qDebug() << Q_FUNC_INFO;
 
      if (data.isEmpty())
      {
@@ -132,7 +131,7 @@ bool DSTalker::addScreenshot(const QString& imgPath, const QString& packageName,
 /*
      else
      {
-         qCDebug(DIGIKAM_WEBSERVICES_LOG) << "Uploaded successfully screenshot "
+         qDebug() << "Uploaded successfully screenshot "
                                           << job->queryMetaData("Screenshot")
                                           << " to Debian Screenshots for package "
                                           << job->queryMetaData("Package")
