@@ -49,7 +49,6 @@ set_package_properties(DigikamCore PROPERTIES
 
 find_package(KF5 "5.5.0" REQUIRED
              COMPONENTS
-             Config
              KIO
 )
 
@@ -63,18 +62,18 @@ include_directories($<TARGET_PROPERTY:Qt5::Widgets,INTERFACE_INCLUDE_DIRECTORIES
 
                     $<TARGET_PROPERTY:Digikam::digikamcore,INTERFACE_INCLUDE_DIRECTORIES>/digikam
 
-                    ${CMAKE_CURRENT_SOURCE_DIR}
+                    ${CMAKE_CURRENT_SOURCE_DIR}/src
 )
 
-qt5_add_resources(debianscreenshotsplugin_QRC_SRCS dsplugin.qrc)
+qt5_add_resources(debianscreenshotsplugin_QRC_SRCS ${CMAKE_CURRENT_SOURCE_DIR}/res/dsplugin.qrc)
 
 set(debianscreenshotsplugin_SRCS
-    ${CMAKE_CURRENT_SOURCE_DIR}/dsmpform.cpp
-    ${CMAKE_CURRENT_SOURCE_DIR}/dspackagedelegate.cpp
-    ${CMAKE_CURRENT_SOURCE_DIR}/dstalker.cpp
-    ${CMAKE_CURRENT_SOURCE_DIR}/dswindow.cpp
-    ${CMAKE_CURRENT_SOURCE_DIR}/dsplugin.cpp
-    ${CMAKE_CURRENT_SOURCE_DIR}/dswidget.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/dsmpform.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/dspackagedelegate.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/dstalker.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/dswindow.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/dsplugin.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/dswidget.cpp
     ${debianscreenshotsplugin_QRC_SRCS}
 )
 

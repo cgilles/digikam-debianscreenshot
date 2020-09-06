@@ -1,0 +1,6 @@
+<RCC>
+    <qresource prefix="/">
+        <file>dslogo.png</file>
+        <file>dsicon.png</file>
+    </qresource>
+</RCC>

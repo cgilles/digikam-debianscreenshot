@@ -59,7 +59,7 @@ QString DSPlugin::iid() const
 
 QIcon DSPlugin::icon() const
 {
-    return QIcon::fromTheme(QLatin1String(":/debianscreenshots/icons/dk-debianscreenshots"));
+    return QIcon(QLatin1String(":/dsicon.png"));
 }
 
 QString DSPlugin::description() const
@@ -70,7 +70,7 @@ QString DSPlugin::description() const
 QString DSPlugin::details() const
 {
     return tr("<p>This tool permit to export items to Debian Screenshots site.</p>"
-                "<p>See Debian Screenshots web site for details: <a href='https://screenshots.debian.net/'>https://screenshots.debian.net/</a></p>");
+              "<p>See Debian Screenshots web site for details: <a href='https://screenshots.debian.net/'>https://screenshots.debian.net/</a></p>");
 }
 
 QList<DPluginAuthor> DSPlugin::authors() const

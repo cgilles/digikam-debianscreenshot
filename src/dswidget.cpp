@@ -57,7 +57,6 @@
 
 // Local includes
 
-
 #include "dspackagedelegate.h"
 #include "dscommon.h"
 
@@ -90,7 +89,7 @@ DSWidget::DSWidget(DInfoInterface* const iface, QWidget* const parent)
     QVBoxLayout* const settingsBoxLayout = new QVBoxLayout(settingsBox);
 
     m_headerLabel = new DActiveLabel(QUrl(), QString(), settingsBox);
-    m_headerLabel->updateData(QUrl(DigikamGenericDebianScreenshotsPlugin::debshotsUrl), QImage(QLatin1String(":/debianscreenshots/dslogo.png")));
+    m_headerLabel->updateData(QUrl(DigikamGenericDebianScreenshotsPlugin::debshotsUrl), QImage(QLatin1String(":/dslogo.png")));
     m_headerLabel->setWhatsThis(tr("This is a clickable link to open the Debian Screenshots home page in a web browser."));
 
     QGroupBox* const pkgGroupBox   = new QGroupBox(settingsBox);

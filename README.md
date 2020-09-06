@@ -6,8 +6,8 @@ This experimental and legacy tool allows you to upload desktop captures to Debia
 
 - Cmake 3.x.
 - Qt5.
-- ECM
-- KF5.
+- ECM.
+- KF5::KIO
 - digiKam 7.x plugin interface. <https://www.digikam.org>
 
 # Compiling and Installing
