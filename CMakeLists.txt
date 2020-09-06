@@ -10,6 +10,7 @@ cmake_minimum_required(VERSION "3.1.0")
 
 set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_AUTOMOC ON)
+set(CMAKE_AUTORCC ON)
 
 find_package(ECM "1.7.0" CONFIG REQUIRED)
 set(CMAKE_MODULE_PATH ${CMAKE_SOURCE_DIR}/cmake/modules ${ECM_MODULE_PATH})
@@ -30,11 +31,14 @@ include(ECMAddAppIcon)
 # Local macros
 include(MacroInstall)
 
+# --- Dependencies
+
 find_package(Qt5 "5.6.0" REQUIRED
              NO_MODULE COMPONENTS
              Core
              Widgets
              Xml
+             LinguistTools              # for i18n
 )
 
 find_package(Threads)
@@ -52,6 +56,8 @@ find_package(KF5 "5.5.0" REQUIRED
              KIO
 )
 
+# ---
+
 include_directories($<TARGET_PROPERTY:Qt5::Widgets,INTERFACE_INCLUDE_DIRECTORIES>
                     $<TARGET_PROPERTY:Qt5::Core,INTERFACE_INCLUDE_DIRECTORIES>
                     $<TARGET_PROPERTY:Qt5::Xml,INTERFACE_INCLUDE_DIRECTORIES>
@@ -62,23 +68,52 @@ include_directories($<TARGET_PROPERTY:Qt5::Widgets,INTERFACE_INCLUDE_DIRECTORIES
 
                     $<TARGET_PROPERTY:Digikam::digikamcore,INTERFACE_INCLUDE_DIRECTORIES>/digikam
 
-                    ${CMAKE_CURRENT_SOURCE_DIR}/src
+                    ${CMAKE_SOURCE_DIR}/src
 )
 
-qt5_add_resources(debianscreenshotsplugin_QRC_SRCS ${CMAKE_CURRENT_SOURCE_DIR}/res/dsplugin.qrc)
+# --- Translations rules (i18n)
 
-set(debianscreenshotsplugin_SRCS
-    ${CMAKE_CURRENT_SOURCE_DIR}/src/dsmpform.cpp
-    ${CMAKE_CURRENT_SOURCE_DIR}/src/dspackagedelegate.cpp
-    ${CMAKE_CURRENT_SOURCE_DIR}/src/dstalker.cpp
-    ${CMAKE_CURRENT_SOURCE_DIR}/src/dswindow.cpp
-    ${CMAKE_CURRENT_SOURCE_DIR}/src/dsplugin.cpp
-    ${CMAKE_CURRENT_SOURCE_DIR}/src/dswidget.cpp
-    ${debianscreenshotsplugin_QRC_SRCS}
+set(dsplugin_translation_files
+    ${CMAKE_SOURCE_DIR}/i18n/de.ts
+    ${CMAKE_SOURCE_DIR}/i18n/es.ts
+    ${CMAKE_SOURCE_DIR}/i18n/fr.ts
+    ${CMAKE_SOURCE_DIR}/i18n/it.ts
+)
+
+set_source_files_properties(${dsplugin_translation_files} PROPERTIES OUTPUT_LOCATION i18n)
+
+#qt5_create_translation(
+#    dsplgin_QM
+#    ${CMAKE_SOURCE_DIR}/src
+#    ${dsplugin_translation_files}
+#)
+
+qt5_add_translation(dsplugin_QM
+                    ${dsplugin_translation_files}
+)
+
+configure_file(${CMAKE_SOURCE_DIR}/i18n/i18n.qrc ${CMAKE_BINARY_DIR} COPYONLY)
+
+# ---
+
+qt5_add_resources(dsplugin_QRC_SRCS
+                  ${CMAKE_SOURCE_DIR}/res/dsplugin.qrc
+                  ${CMAKE_BINARY_DIR}/i18n.qrc
+)
+
+set(dsplugin_SRCS
+    ${CMAKE_SOURCE_DIR}/src/dsmpform.cpp
+    ${CMAKE_SOURCE_DIR}/src/dspackagedelegate.cpp
+    ${CMAKE_SOURCE_DIR}/src/dstalker.cpp
+    ${CMAKE_SOURCE_DIR}/src/dswindow.cpp
+    ${CMAKE_SOURCE_DIR}/src/dsplugin.cpp
+    ${CMAKE_SOURCE_DIR}/src/dswidget.cpp
+    ${dsplugin_QRC_SRCS}
+    ${dsplugin_QM}
 )
 
 add_library(Generic_DebianScreenshots_Plugin
-            MODULE ${debianscreenshotsplugin_SRCS}
+            MODULE ${dsplugin_SRCS}
 )
 
 set_target_properties(Generic_DebianScreenshots_Plugin PROPERTIES PREFIX "")
