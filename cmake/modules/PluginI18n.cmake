@@ -16,7 +16,7 @@ set(plugin_translation_files
 set_source_files_properties(${plugin_translation_files} PROPERTIES OUTPUT_LOCATION  ${CMAKE_BINARY_DIR}/i18n)
 
 #qt5_create_translation(
-#    dsplgin_i18n_QM
+#    plgin_i18n_QM
 #    ${CMAKE_SOURCE_DIR}/src
 #    ${plugin_translation_files}
 #)
