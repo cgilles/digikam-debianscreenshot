@@ -56,7 +56,7 @@ find_package(KF5 "5.5.0" REQUIRED
              KIO
 )
 
-# ---
+include(PluginI18n)
 
 include_directories($<TARGET_PROPERTY:Qt5::Widgets,INTERFACE_INCLUDE_DIRECTORIES>
                     $<TARGET_PROPERTY:Qt5::Core,INTERFACE_INCLUDE_DIRECTORIES>
@@ -71,31 +71,6 @@ include_directories($<TARGET_PROPERTY:Qt5::Widgets,INTERFACE_INCLUDE_DIRECTORIES
                     ${CMAKE_SOURCE_DIR}/src
 )
 
-# --- Translations rules (i18n)
-
-set(dsplugin_translation_files
-    ${CMAKE_SOURCE_DIR}/i18n/de.ts
-    ${CMAKE_SOURCE_DIR}/i18n/es.ts
-    ${CMAKE_SOURCE_DIR}/i18n/fr.ts
-    ${CMAKE_SOURCE_DIR}/i18n/it.ts
-)
-
-set_source_files_properties(${dsplugin_translation_files} PROPERTIES OUTPUT_LOCATION i18n)
-
-#qt5_create_translation(
-#    dsplgin_QM
-#    ${CMAKE_SOURCE_DIR}/src
-#    ${dsplugin_translation_files}
-#)
-
-qt5_add_translation(dsplugin_QM
-                    ${dsplugin_translation_files}
-)
-
-configure_file(${CMAKE_SOURCE_DIR}/i18n/i18n.qrc ${CMAKE_BINARY_DIR} COPYONLY)
-
-# ---
-
 qt5_add_resources(dsplugin_QRC_SRCS
                   ${CMAKE_SOURCE_DIR}/res/dsplugin.qrc
                   ${CMAKE_BINARY_DIR}/i18n.qrc
@@ -109,7 +84,7 @@ set(dsplugin_SRCS
     ${CMAKE_SOURCE_DIR}/src/dsplugin.cpp
     ${CMAKE_SOURCE_DIR}/src/dswidget.cpp
     ${dsplugin_QRC_SRCS}
-    ${dsplugin_QM}
+    ${plugin_i18n_QM}
 )
 
 add_library(Generic_DebianScreenshots_Plugin
