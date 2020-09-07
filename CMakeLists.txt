@@ -19,14 +19,8 @@ set(CMAKE_MODULE_PATH ${CMAKE_SOURCE_DIR}/cmake/modules ${ECM_MODULE_PATH})
 include(CMakePackageConfigHelpers)
 include(FeatureSummary)
 
-# ECM macros
-include(ECMOptionalAddSubdirectory)
-include(ECMMarkNonGuiExecutable)
-include(ECMGenerateHeaders)
-include(ECMGeneratePriFile)
+# ECM macros (required for KF5 dependencies)
 include(ECMSetupVersion)
-include(ECMInstallIcons)
-include(ECMAddAppIcon)
 
 # Local macros
 include(MacroInstall)
