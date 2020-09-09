@@ -25,5 +25,14 @@ qt5_add_translation(plugin_i18n_QM
                     ${plugin_translation_files}
 )
 
-configure_file(${CMAKE_SOURCE_DIR}/i18n/i18n.qrc ${CMAKE_BINARY_DIR} COPYONLY)
+foreach(file ${plugin_i18n_QM})
+
+    get_filename_component(directory ${file} DIRECTORY)
+    get_filename_component(basename  ${file} NAME)
+
+    set(PLUGIN_QM_XML "${PLUGIN_QM_XML}<file>${directory}/${basename}</file>")
+
+endforeach()
+
+configure_file(${CMAKE_SOURCE_DIR}/cmake/templates/i18n.qrc.in_cmake ${CMAKE_BINARY_DIR}/i18n.qrc)
 
