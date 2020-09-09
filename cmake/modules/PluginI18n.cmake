@@ -6,12 +6,7 @@
 
 # --- Translations rules (i18n)
 
-set(plugin_translation_files
-    ${CMAKE_SOURCE_DIR}/i18n/de.ts
-    ${CMAKE_SOURCE_DIR}/i18n/es.ts
-    ${CMAKE_SOURCE_DIR}/i18n/fr.ts
-    ${CMAKE_SOURCE_DIR}/i18n/it.ts
-)
+include(${CMAKE_SOURCE_DIR}/i18n/i18n_list.cmake)
 
 set_source_files_properties(${plugin_translation_files} PROPERTIES OUTPUT_LOCATION  ${CMAKE_BINARY_DIR}/i18n)
 
