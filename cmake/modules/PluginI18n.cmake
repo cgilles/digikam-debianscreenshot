@@ -11,7 +11,7 @@ include(${CMAKE_SOURCE_DIR}/i18n/i18n_list.cmake)
 set_source_files_properties(${plugin_translation_files} PROPERTIES OUTPUT_LOCATION  ${CMAKE_BINARY_DIR}/i18n)
 
 #qt5_create_translation(
-#    plgin_i18n_QM
+#    plugin_i18n_QM
 #    ${CMAKE_SOURCE_DIR}/src
 #    ${plugin_translation_files}
 #)
