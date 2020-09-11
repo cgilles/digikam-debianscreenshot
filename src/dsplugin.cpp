@@ -25,15 +25,60 @@
 // Qt includes
 
 #include <QPointer>
+#include <QTranslator>
+#include <QLocale>
 
 // Local includes
 
 #include "dswindow.h"
 
 // NOTE: need to be done outside plugin namespace.
-void initDSPluginResource()
+void s_initDSPluginResource()
 {
     Q_INIT_RESOURCE(dsplugin);
+}
+
+/**
+ * Load translation file from normal KF5 packaging installation
+ */
+static bool s_loadTranslation(const QString& lang)
+{
+    QTranslator* const i18n = new QTranslator(qApp);
+
+    if (!i18n->load(QString::fromLatin1(":/i18n/%1.qm").arg(lang)))
+    {
+        delete i18n;
+        return false;
+    }
+
+    qApp->installTranslator(i18n);
+
+    return true;
+}
+
+/**
+ * Load KF5 translators system based translations
+ */
+static void s_loadTranslations()
+{
+    // Quote from ecm_create_qm_loader created code:
+    // The way Qt translation system handles plural forms makes it necessary to
+    // have a translation file which contains only plural forms for `en`.
+    // That's why we load the `en` translation unconditionally, then load the
+    // translation for the current locale to overload it.
+    const QString en(QStringLiteral("en"));
+
+    s_loadTranslation(en);
+
+    QLocale locale = QLocale::system();
+
+    if (locale.name() != en)
+    {
+        if (!s_loadTranslation(locale.name()))
+        {
+            s_loadTranslation(locale.bcp47Name());
+        }
+    }
 }
 
 namespace DigikamGenericDebianScreenshotsPlugin
@@ -42,7 +87,8 @@ namespace DigikamGenericDebianScreenshotsPlugin
 DSPlugin::DSPlugin(QObject* const parent)
     : DPluginGeneric(parent)
 {
-    initDSPluginResource();
+    s_initDSPluginResource();
+    s_loadTranslations();
 }
 
 DSPlugin::~DSPlugin()
