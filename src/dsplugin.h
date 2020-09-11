@@ -63,6 +63,18 @@ private Q_SLOTS:
 
 private:
 
+    /**
+     * Load KF5 translators system based translations
+     */
+    void loadTranslations();
+
+    /**
+     * Load translation file from normal KF5 packaging installation
+     */
+    bool loadTranslation(const QString& lang) const;
+
+private:
+
     QPointer<DSWindow> m_toolDlg;
 };
 
