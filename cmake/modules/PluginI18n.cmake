@@ -8,13 +8,24 @@
 
 include(${CMAKE_SOURCE_DIR}/i18n/i18n_list.cmake)
 
-set_source_files_properties(${plugin_translation_files} PROPERTIES OUTPUT_LOCATION  ${CMAKE_BINARY_DIR}/i18n)
+set_source_files_properties(${plugin_translation_files} PROPERTIES OUTPUT_LOCATION ${CMAKE_BINARY_DIR}/i18n)
 
-#qt5_create_translation(
-#    plugin_i18n_QM
-#    ${CMAKE_SOURCE_DIR}/src
-#    ${plugin_translation_files}
-#)
+foreach(file ${plugin_translation_files})
+
+    if(NOT EXISTS "${file}")
+
+       message(STATUS "Translation file ${file} do not exists yet.")
+       message(STATUS "It will be created in ${CMAKE_SOURCE_DIR}/i18n")
+       message(STATUS "Don't forget to add this new file on git repository.")
+
+       qt5_create_translation(missing_i18n_QM
+                              ${CMAKE_SOURCE_DIR}
+                              ${file}
+       )
+
+    endif()
+
+endforeach()
 
 qt5_add_translation(plugin_i18n_QM
                     ${plugin_translation_files}
