@@ -33,7 +33,7 @@
 #include "dswindow.h"
 
 // NOTE: need to be done outside plugin namespace.
-void s_initDSPluginResource()
+void s_initResource()
 {
     Q_INIT_RESOURCE(dsplugin);
 }
@@ -44,7 +44,7 @@ namespace DigikamGenericDebianScreenshotsPlugin
 DSPlugin::DSPlugin(QObject* const parent)
     : DPluginGeneric(parent)
 {
-    s_initDSPluginResource();
+    s_initResource();
     loadTranslations();
 }
 
