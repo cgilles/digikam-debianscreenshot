@@ -36,6 +36,13 @@
 void s_initResource()
 {
     Q_INIT_RESOURCE(dsplugin);
+    Q_INIT_RESOURCE(i18n);
+}
+
+void s_cleanupResource()
+{
+    Q_CLEANUP_RESOURCE(dsplugin);
+    Q_CLEANUP_RESOURCE(i18n);
 }
 
 namespace DigikamGenericDebianScreenshotsPlugin
