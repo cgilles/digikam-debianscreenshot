@@ -52,10 +52,6 @@ find_package(KF5 "5.5.0" REQUIRED
 
 include(i18nUtils)
 
-qt5_add_resources(i18n_QRC_SRCS
-                  ${CMAKE_CURRENT_BINARY_DIR}/i18n.qrc
-)
-
 include_directories($<TARGET_PROPERTY:Qt5::Widgets,INTERFACE_INCLUDE_DIRECTORIES>
                     $<TARGET_PROPERTY:Qt5::Core,INTERFACE_INCLUDE_DIRECTORIES>
                     $<TARGET_PROPERTY:Qt5::Xml,INTERFACE_INCLUDE_DIRECTORIES>
