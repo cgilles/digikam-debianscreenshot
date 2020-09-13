@@ -63,18 +63,6 @@ private Q_SLOTS:
 
 private:
 
-    /**
-     * Load translators system based i1!n
-     */
-    void loadTranslations();
-
-    /**
-     * Load one translation file from normal i18n packaging installation
-     */
-    bool loadTranslation(const QString& lang) const;
-
-private:
-
     QPointer<DSWindow> m_toolDlg;
 };
 

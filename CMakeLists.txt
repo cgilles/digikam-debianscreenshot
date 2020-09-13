@@ -50,7 +50,11 @@ find_package(KF5 "5.5.0" REQUIRED
              KIO
 )
 
-include(PluginI18n)
+include(i18nUtils)
+
+qt5_add_resources(i18n_QRC_SRCS
+                  ${CMAKE_CURRENT_BINARY_DIR}/i18n.qrc
+)
 
 include_directories($<TARGET_PROPERTY:Qt5::Widgets,INTERFACE_INCLUDE_DIRECTORIES>
                     $<TARGET_PROPERTY:Qt5::Core,INTERFACE_INCLUDE_DIRECTORIES>
@@ -67,7 +71,6 @@ include_directories($<TARGET_PROPERTY:Qt5::Widgets,INTERFACE_INCLUDE_DIRECTORIES
 
 qt5_add_resources(dsplugin_QRC_SRCS
                   ${CMAKE_SOURCE_DIR}/res/dsplugin.qrc
-                  ${CMAKE_BINARY_DIR}/i18n.qrc
 )
 
 set(dsplugin_SRCS
@@ -78,7 +81,8 @@ set(dsplugin_SRCS
     ${CMAKE_SOURCE_DIR}/src/dsplugin.cpp
     ${CMAKE_SOURCE_DIR}/src/dswidget.cpp
     ${dsplugin_QRC_SRCS}
-    ${plugin_i18n_QM}
+    ${i18n_QRC_SRCS}
+    ${i18n_QM}
 )
 
 add_library(Generic_DebianScreenshots_Plugin

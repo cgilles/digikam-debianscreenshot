@@ -31,18 +31,17 @@
 // Local includes
 
 #include "dswindow.h"
+#include "i18nutils.h"
 
 // NOTE: need to be done outside plugin namespace.
 void s_initResource()
 {
     Q_INIT_RESOURCE(dsplugin);
-    Q_INIT_RESOURCE(i18n);
 }
 
 void s_cleanupResource()
 {
     Q_CLEANUP_RESOURCE(dsplugin);
-    Q_CLEANUP_RESOURCE(i18n);
 }
 
 namespace DigikamGenericDebianScreenshotsPlugin
@@ -52,12 +51,14 @@ DSPlugin::DSPlugin(QObject* const parent)
     : DPluginGeneric(parent)
 {
     s_initResource();
-    loadTranslations();
+    s_initI18nResource();
+    s_loadI18n(name());
 }
 
 DSPlugin::~DSPlugin()
 {
     s_cleanupResource();
+    s_cleanupI18nResource();
 }
 
 void DSPlugin::cleanUp()
@@ -122,45 +123,6 @@ void DSPlugin::slotDebianScreenshots()
         m_toolDlg = new DSWindow(infoIface(sender()), 0);
         m_toolDlg->setPlugin(this);
         m_toolDlg->show();
-    }
-}
-
-bool DSPlugin::loadTranslation(const QString& lang) const
-{
-    qDebug() << "Loading i18n" << lang << "for plugin" << name();
-
-    QTranslator* const i18n = new QTranslator(qApp);
-
-    if (!i18n->load(QString::fromLatin1(":/i18n/%1.qm").arg(lang)))
-    {
-        delete i18n;
-        return false;
-    }
-
-    qApp->installTranslator(i18n);
-
-    return true;
-}
-
-void DSPlugin::loadTranslations()
-{
-    // Quote from ecm_create_qm_loader created code:
-    // The way Qt translation system handles plural forms makes it necessary to
-    // have a translation file which contains only plural forms for `en`.
-    // That's why we load the `en` translation unconditionally, then load the
-    // translation for the current locale to overload it.
-    const QString en(QStringLiteral("en"));
-
-    loadTranslation(en);
-
-    QLocale locale = QLocale::system();
-
-    if (locale.name() != en)
-    {
-        if (!loadTranslation(locale.name()))
-        {
-            loadTranslation(locale.bcp47Name());
-        }
     }
 }
 
