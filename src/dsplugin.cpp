@@ -57,6 +57,7 @@ DSPlugin::DSPlugin(QObject* const parent)
 
 DSPlugin::~DSPlugin()
 {
+    s_cleanupResource();
 }
 
 void DSPlugin::cleanUp()

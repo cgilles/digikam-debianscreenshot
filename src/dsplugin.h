@@ -64,12 +64,12 @@ private Q_SLOTS:
 private:
 
     /**
-     * Load KF5 translators system based translations
+     * Load translators system based i1!n
      */
     void loadTranslations();
 
     /**
-     * Load translation file from normal KF5 packaging installation
+     * Load one translation file from normal i18n packaging installation
      */
     bool loadTranslation(const QString& lang) const;
 
